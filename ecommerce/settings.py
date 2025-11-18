@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ecommerce',
+        'USER': 'root',
+        'PASSWORD': 'ttd02042004',  # Bỏ trống nếu bạn không đặt mật khẩu
+        'HOST': 'localhost',  # Hoặc '127.0.0.1'
+        'PORT': '3306',       # Có thể bỏ trống để dùng cổng mặc định
     }
 }
 
@@ -127,3 +131,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Custom User Model
+AUTH_USER_MODEL = 'myapp.User'
