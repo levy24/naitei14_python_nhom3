@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator
 from decimal import Decimal
+from .enums import ORDER_STATUS_CHOICES
+from .constants import MAX_DIGITS, DECIMAL_PLACES
 
 
 # 1. User model (kế thừa AbstractUser)
@@ -57,8 +59,8 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     price = models.DecimalField(
-        max_digits=12,
-        decimal_places=2,
+        max_digits=MAX_DIGITS,
+        decimal_places=DECIMAL_PLACES,
         validators=[MinValueValidator(Decimal('0.01'))]
     )
     stock_quantity = models.IntegerField(
@@ -142,14 +144,6 @@ class CartItem(models.Model):
 
 # 6. Order model
 class Order(models.Model):
-    ORDER_STATUS_CHOICES = [
-        ('pending', 'Chờ xác nhận'),
-        ('confirmed', 'Đã xác nhận'),
-        ('shipped', 'Đang giao'),
-        ('completed', 'Đã giao thành công'),
-        ('cancelled', 'Hủy bởi người dùng'),
-        ('rejected', 'Bị từ chối bởi admin'),
-    ]
     
     user = models.ForeignKey(
         User,
@@ -158,8 +152,8 @@ class Order(models.Model):
     )
     order_date = models.DateTimeField(auto_now_add=True)
     total_amount = models.DecimalField(
-        max_digits=12,
-        decimal_places=2,
+        max_digits=MAX_DIGITS,
+        decimal_places=DECIMAL_PLACES,
         validators=[MinValueValidator(Decimal('0.00'))]
     )
     status = models.CharField(
@@ -204,8 +198,8 @@ class OrderItem(models.Model):
     )
     quantity = models.IntegerField(validators=[MinValueValidator(1)])
     price_at_purchase = models.DecimalField(
-        max_digits=12,
-        decimal_places=2,
+        max_digits=MAX_DIGITS,
+        decimal_places=DECIMAL_PLACES,
         validators=[MinValueValidator(Decimal('0.01'))],
         help_text='Giá tại thời điểm mua'
     )
