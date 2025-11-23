@@ -20,4 +20,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('myapp.urls')),  # Kết nối URL của myapp
+    path('products/', include('products.urls')),  # Kết nối URL của products
+    path('cart/', include('cart.urls')),  # Kết nối URL của cart    
+    path('orders/', include('orders.urls')),  # Kết nối URL của orders
+    path('comments/', include('comments.urls')),  # Kết nối URL của comments
 ]

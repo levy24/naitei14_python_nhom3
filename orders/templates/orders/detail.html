@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Chi tiết đơn hàng #{{ order.id }}</h1>
+<ul>
+  {% for item in order.orderitem_set.all %}
+  <li>{{ item.product.name }} - {{ item.quantity }} x {{ item.price }} VNĐ</li>
+  {% endfor %}
+</ul>
+<p>Tổng: {{ order.total_price }} VNĐ</p>
+<p>Trạng thái: {{ order.status }}</p>
+{% endblock %}

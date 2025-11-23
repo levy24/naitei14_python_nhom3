@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',  # <--- Thêm app của bạn vào đây
+    'products',
+    'cart',
+    'orders',   
+    'comments',
 ]
 
 MIDDLEWARE = [
