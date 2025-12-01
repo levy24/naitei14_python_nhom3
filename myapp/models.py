@@ -1,3 +1,5 @@
+from datetime import timedelta
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator
@@ -208,6 +210,18 @@ class OrderItem(models.Model):
         db_table = 'order_items'
         verbose_name = 'Order Item'
         verbose_name_plural = 'Order Items'
+        
+    @property
+    def subtotal(self):
+        return self.price_at_purchase * self.quantity
+    
+    @property
+    def can_review(self):
+        if self.order.status != 'completed':
+            return False
+        if not self.order.updated_at:
+            return False
+        return timezone.now() - self.order.updated_at <= timedelta(days=7)   
     
     def __str__(self):
         return f"{self.product.name} x {self.quantity}"

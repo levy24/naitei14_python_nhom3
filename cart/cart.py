@@ -1,6 +1,5 @@
 from decimal import Decimal
-from products.models import Product
-
+from myapp.models import Product   
 class Cart:
     SESSION_KEY = 'cart'
 

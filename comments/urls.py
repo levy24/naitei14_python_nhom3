@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import CommentCreateView, CommentDeleteView
+from . import views
 
-app_name = 'comments'
+app_name = "comments"
 
 urlpatterns = [
-    path('add/<int:product_id>/<slug:slug>/', CommentCreateView.as_view(), name='add'),
-    path('delete/<int:pk>/', CommentDeleteView.as_view(), name='delete'),
+    path("review/order-item/<int:order_item_id>/", views.review_order_item,
+         name="review_order_item"),
+    path("delete/<int:pk>/", views.delete_comment, name="delete"),
 ]
